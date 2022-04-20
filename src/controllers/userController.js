@@ -1,3 +1,4 @@
+//const res = require("express/lib/response")
 const UserModel= require("../models/userModel")
 
 const createUser= async function (req, res) {
@@ -11,5 +12,11 @@ const getUsersData= async function (req, res) {
     res.send({msg: allUsers})
 }
 
+const basicCode = async function(req,res) {
+    console.log("Congrats, I am using the Middleware")
+    res.send({msg: "This is coming from Postman"})
+}
+
 module.exports.createUser= createUser
 module.exports.getUsersData= getUsersData
+module.exports.basicCode = basicCode
