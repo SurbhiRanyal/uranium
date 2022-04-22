@@ -16,6 +16,8 @@ router.post('/product',productController.createProduct)
 router.post('/users',userController.createUser)
 router.post('/order',orderController.createOrder)
 router.get('/mid1',mid1,commonMiddleware.mid1)
+router.post("/orders", commonMiddleware.validateHeader, orderController.createOrder)
+
 
 
 
