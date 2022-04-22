@@ -1,16 +1,23 @@
-const orderModel = require("../models/orderModel")
-const userModel = require("../models/userModel")
 
-const mid1 = (req, res, next) => {
-  await userModel.updateMany({}, { $set: {isFreeAppUser: false}},{upsert:true})
-  await orderModel.updateMany({}, { $set: {isFreeAppUser: false}},{upsert:true})
 
-    if(req.headers.hasOwnProperty('isfreeappuser')){
-      req.headers.isFreeAppUser = req.headers.isfreeappuser;
-      next();
-    }else{
-      res.send({msg: 'The request is missing a mandatory header.', status: false});
+const validateHeader= function ( req, res, next) {
+    let headers = req.headers
+    let appType = headers["isFreeAppUser"]
+    if(!appType) {
+        appType = headers["isfreeappuser"]
     }
-  }
-  
-  module.exports.mid1 = mid1;
+    if(!appType) {
+        return res.send({status: false, message: "A mandatory header is missing"})
+    }
+
+    //let appTypeFree = Boolean(appType)//This works on truthy/falsy
+    if(appType == 'true') {
+        req.appTypeFree = true
+    } else {
+        req.appTypeFree = false
+    }
+
+    next()
+}
+
+module.exports.validateHeader= validateHeader
