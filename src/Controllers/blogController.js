@@ -99,12 +99,12 @@ const updateBlog = async function (req, res) {
         .status(400)
         .send({ status: false, msg: "Please enter a blog id" });
     }
-    // const isvalidId = await blogModel.find({_id:blogId,isDeleted:false});
-    // if (isvalidId.length ==0) {
-    //   return res
-    //     .status(401)
-    //     .send({ status: false, msg: "Please enter a valid blogId" });
-    // }
+    const isvalidId = await blogModel.find({_id:blogId,isDeleted:false});
+    if (isvalidId.length == 0) {
+      return res
+        .status(401)
+        .send({ status: false, msg: "Please enter a valid blogId" });
+    }
     if (!details.tags || details.tags.length == 0 || Object.keys(details.tags).length==0) {
       return res.status(400).send({
         status: false,
@@ -222,7 +222,6 @@ const deleteQuery = async function (req, res) {
     res.status(500).send({ status: false, msg: err.massage });
   }
 };
-
 module.exports.CreateBlog = CreateBlog;
 module.exports.updateBlog = updateBlog;
 module.exports.deleteBlog = deleteBlog;
