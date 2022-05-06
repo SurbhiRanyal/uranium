@@ -63,7 +63,7 @@ const createIntern = async function (req, res) {
     if (!data.collegeName) {
       return res
         .status(400)
-        .send({ status: false, message: "collegeName is required" });
+        .send({ status: false, message: "collegeId is required" });
     }
     let collegeName = await CollegeModels
       .find({ name: req.body.collegeName })
