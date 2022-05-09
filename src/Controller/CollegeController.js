@@ -16,7 +16,7 @@ const createCollege = async function (req, res) {
         .status(400)
         .send({ status: false, message: "name is required" });
     }
-    if (!/^([a-zA-Z]+)$/.test(name)) {
+    if (!/^([a-zA-Z]+)$/.test(name)) {    // surb hi
       return res
         .status(401)
         .send({ status: false, msg: "Please enter a valid name" });

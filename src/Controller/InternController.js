@@ -52,7 +52,7 @@ const createIntern = async function (req, res) {
     ) {
       return res
         .status(400)
-        .send({ status: false, message: "Mobile No is required" });
+        .send({ status: false, message: "plz enter valid mobile number " });
     }
     let checkmobileExist = await InternModels.find({ mobile: data.mobile });
     if (checkmobileExist.length != 0) {
